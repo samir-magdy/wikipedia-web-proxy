@@ -1,0 +1,288 @@
+/* WikiSpace Custom Styles */
+@import url("https://fonts.googleapis.com/css2?family=Quantico&display=swap");
+
+* {
+  color: white !important;
+  font-family: Quantico, Arial;
+}
+div#bodyContent {
+  max-width: 1400px !important;
+}
+/* 1. Structural Elements */
+div#mw-interwiki-results,
+nav.vector-toc-landmark,
+div.vector-body-before-content,
+div#contentSub,
+div.vector-column-start,
+div.vector-column-end,
+footer {
+  display: none !important;
+}
+
+/* 2. Navigation & Interface */
+ul#filetoc,
+ul.portalbox,
+div.vector-page-toolbar,
+div.vector-header-start,
+div.styled-select,
+nav[data-jsl10n="all-languages-nav-label"] {
+  display: none !important;
+}
+
+/* 3. In-Article Decorations & Inputs */
+table.plainlinks,
+table.box-More_citations_needed,
+span.mw-editsection,
+sup,
+span.cdx-text-input__icon,
+a.cdx-button,
+hr,
+div.mw-search-spinner {
+  display: none !important;
+}
+
+/* 4. Sidebars, Banners & Metadata */
+div.side-box,
+div.spoken-wikipedia,
+div.nowraplinks,
+div.navbox,
+div.catlinks,
+div.wikipedia25-cta-container {
+  display: none !important;
+}
+
+/* 5. Media Specific Cleanup */
+td > style,
+caption.infobox-title,
+td.infobox-image,
+div#shared-image-desc,
+div#mw-sharedupload {
+  display: none !important;
+}
+
+body {
+  display: flex !important;
+  justify-content: center !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+  padding-top: 50px;
+  background: #000000 url("/asfalt-light.png") !important;
+}
+
+a {
+  color: #0083fd !important;
+}
+
+a:hover {
+  color: #00e5ff !important;
+}
+
+/* Search Input Styles */
+div#search-input {
+  margin-right: 10px;
+}
+
+input#searchInput {
+  font-size: 20px !important;
+  border: #d3d3d3 groove 3px;
+  border-radius: 2rem;
+  background-color: rgb(16, 20, 24) !important;
+  padding: 15px !important;
+}
+
+span.cdx-text-input__icon {
+  color: white !important;
+}
+
+input#searchInput:focus {
+  border: #d3d3d3 groove 3px;
+}
+
+div.search-container {
+  margin: auto !important;
+}
+
+form#search-form {
+  border-radius: 2rem !important;
+}
+
+/* Button Styles */
+button.pure-button {
+  display: block !important;
+  margin: auto !important;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+  margin-top: 20px !important;
+  color: #000 !important;
+  background: #fff !important;
+  border: none !important;
+  border-radius: 2rem !important;
+}
+
+button.pure-button:hover {
+  background: #1c1c1c !important;
+  border: inset #fff 3px !important;
+  color: #fff !important;
+}
+
+button.cdx-button {
+  color: #000 !important;
+  font-weight: bold !important;
+  border: none !important;
+  border-radius: 2rem !important;
+}
+
+button.cdx-button:hover {
+  background: #d4d4d4 !important;
+}
+
+/* Page Title */
+div#pageTitle {
+  margin-top: 50%;
+}
+
+/* Header */
+#proxifiti-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  letter-spacing: 1px;
+  align-items: center;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 20px;
+  z-index: 99999 !important;
+  background: url("asfalt-light.png");
+  background-color: rgb(0, 0, 0) !important;
+  width: 100vw;
+  padding: 10px;
+  padding-bottom: 20px;
+  font-size: 20px;
+}
+
+/* Page Container */
+div.mw-page-container {
+  padding: 0 !important;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+div.vector-header-container {
+  position: fixed;
+  width: 100%;
+  background-color: rgb(0, 0, 0) !important;
+  z-index: 9999;
+  background: url("./asfalt-light.png");
+  left: 50 !important;
+}
+
+div#simpleSearch {
+  background-color: rgb(16, 20, 24) !important;
+}
+
+/* Figure Styles */
+figure {
+  border: groove rgba(255, 255, 255, 0.7) !important;
+  background-color: rgba(0, 0, 0, 0.6) !important;
+}
+
+figcaption {
+  border: groove rgba(255, 255, 255, 0.7) !important;
+  border-top: none !important;
+  padding: 10px !important;
+}
+
+/* Table Styles */
+table {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: inset rgba(255, 255, 255, 0.7) !important;
+  padding: 10px !important;
+}
+
+th {
+  background-color: #363636 !important;
+}
+
+td {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Form Styles */
+form#searchform {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px !important;
+}
+
+div.oo-ui-fieldLayout-field {
+  display: flex !important;
+  gap: 10px !important;
+}
+
+input#ooui-php-1 {
+  min-width: 300px;
+  border-radius: 2rem;
+  border: none !important;
+  color: black !important;
+}
+
+input#ooui-php-1:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: #72777d !important;
+}
+
+button.oo-ui-inputWidget-input {
+  background-color: #fff !important;
+  border-radius: 2rem !important;
+  border: none !important;
+}
+
+button.oo-ui-inputWidget-input:hover {
+  background-color: #d4d4d4 !important;
+}
+
+span.oo-ui-labelElement-label {
+  color: #000 !important;
+  font-weight: bold !important;
+}
+
+/* Content Container */
+div.mw-content-container {
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 40px !important;
+}
+
+main#content {
+  grid-template-columns: 1fr;
+}
+
+div.mw-page-container-inner {
+  grid-template-columns: 1fr;
+}
+
+/* Sidebar */
+div.sidebar-list-title {
+  border-top: none !important;
+  border-bottom: 1px solid #aaa !important;
+  padding: 5px !important;
+  margin-bottom: 10px !important;
+}
+
+div.hatnote {
+  display: initial !important;
+}
+
+div.thumbinner,
+div.multiimageinner,
+div.portal-bar {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  border: inset rgba(255, 255, 255, 0.7) !important;
+}
