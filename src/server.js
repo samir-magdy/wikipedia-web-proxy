@@ -5,7 +5,7 @@ import modifyHTML from "./modifier.js";
 
 const myServer = express();
 const PORT = process.env.PORT || 3000;
-const targetUrl = "https:wikipedia.org";
+const targetUrl = "https://wikipedia.org";
 
 myServer.use(helmet());
 
@@ -29,10 +29,13 @@ async function retryAsync(fn, retries = 2, delay = 800) {
 
 myServer.get("/", async (req, res) => {
   const baseUrl = req.query.targetUrl || targetUrl;
-  if (!baseUrl.includes("wikipedia.org")) {
-    return res
-      .status(403)
-      .send("Forbidden: This proxy only supports Wikipedia.");
+  try {
+    const urlObjWhitelist = new URL(baseUrl);
+    if (!urlObjWhitelist.hostname.endsWith("wikipedia.org")) {
+      return res.status(403).send("Forbidden");
+    }
+  } catch (err) {
+    return res.status(400).send("Error: Invalid URL format.");
   }
   const { targetUrl: _, ...otherParams } = req.query;
 
@@ -60,11 +63,15 @@ myServer.get("/", async (req, res) => {
 
 myServer.get("/resource", async (req, res) => {
   const targetParam = req.query.targetUrl;
+  if (!targetParam) {
+    return res.status(400).send("Error: No targetUrl provided.");
+  }
 
   try {
     const result = await retryAsync(() => urlFetcher(targetParam), 2, 800);
     res.setHeader("Content-Type", result.dataType);
-    res.send(Buffer.from(result.siteData));
+    res.setHeader("Cache-Control", "public, max-age=86400");
+    res.end(Buffer.from(result.siteData));
   } catch (err) {
     res
       .status(502)

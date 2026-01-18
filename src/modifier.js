@@ -41,6 +41,54 @@ function handleForms($, baseUrl) {
 
 function modifyHTML(html, targetUrl) {
   const $ = load(html);
+  $(`
+    script,
+    noscript,
+    iframe,
+    object,
+    embed,
+    audio,
+    link[rel="preload"],
+    link[rel="prefetch"],
+    link[rel="dns-prefetch"],
+    link[rel="preconnect"],
+    link[rel="modulepreload"],
+    meta[http-equiv="refresh"],
+    div#mw-interwiki-results,
+    nav.vector-toc-landmark,
+    div.vector-body-before-content,
+    div#contentSub,
+    div.vector-column-start,
+    div.vector-column-end,
+    footer,
+    ul#filetoc,
+    ul.portalbox,
+    div.vector-page-toolbar,
+    div.vector-header-start,
+    div.styled-select,
+    nav[data-jsl10n="all-languages-nav-label"],
+    table.plainlinks,
+    table.box-More_citations_needed,
+    div.side-box,
+    div.spoken-wikipedia,
+    div.nowraplinks,
+    div.navbox,
+    div.catlinks,
+    div.wikipedia25-cta-container,
+    div#shared-image-desc,
+    div#mw-sharedupload,
+    nav.vector-user-links,
+    div.mw-aria-live-region,
+    span.mw-editsection,
+    sup,
+    span.cdx-text-input__icon,
+    a.cdx-button,
+    hr,
+    div.mw-search-spinner,
+    td > style,
+    caption.infobox-title`).remove();
+
+  $("img, source").removeAttr("srcset");
 
   $("title").text("WikiSpace");
 
@@ -54,6 +102,7 @@ function modifyHTML(html, targetUrl) {
     if (tagName === "img") {
       attribute = "src";
       route = "/resource";
+      $(element).attr("loading", "lazy");
     } else if (tagName === "link") {
       attribute = "href";
       route = "/resource";
@@ -120,17 +169,21 @@ function modifyHTML(html, targetUrl) {
   $("div.sidebar-list").removeClass();
   $("div.mw-search-form-wrapper").removeClass();
 
-  $("img").css("background-color", "#1d1d1d49");
-  $("nav.vector-user-links, div.mw-aria-live-region").css("display", "none");
+  // Build the custom persistent header securly with cheerio:
 
-  $("body").prepend(
-    `<header id="proxifiti-header">
-      <p style="margin: 5px; margin-bottom: 0;">
-        <strong>Live Source:&nbsp;</strong>
-        <a href="${targetUrl}" target="_blank">${targetUrl}</a>
-      </p>
-    </header>`,
-  );
+  const $header = $('<header id="proxifiti-header"></header>');
+  const $p = $("<p></p>");
+  const $strong = $("<strong>Live Source:&nbsp;</strong>");
+
+  const $link = $("<a></a>")
+    .attr("href", targetUrl)
+    .attr("target", "_blank")
+    .text(targetUrl);
+
+  $p.append($strong).append($link);
+  $header.append($p);
+
+  $("body").prepend($header);
 
   return $.html();
 }

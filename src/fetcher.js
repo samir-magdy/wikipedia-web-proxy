@@ -1,6 +1,9 @@
 async function urlFetcher(targetUrl) {
   try {
     const response = await fetch(targetUrl);
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
     const contentType = response.headers.get("content-type");
     const data = await response.arrayBuffer();
     return { siteData: data, dataType: contentType, absoluteUrl: response.url };

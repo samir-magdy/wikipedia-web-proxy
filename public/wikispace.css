@@ -8,56 +8,8 @@
 div#bodyContent {
   max-width: 1400px !important;
 }
-/* 1. Structural Elements */
-div#mw-interwiki-results,
-nav.vector-toc-landmark,
-div.vector-body-before-content,
-div#contentSub,
-div.vector-column-start,
-div.vector-column-end,
-footer {
-  display: none !important;
-}
-
-/* 2. Navigation & Interface */
-ul#filetoc,
-ul.portalbox,
-div.vector-page-toolbar,
-div.vector-header-start,
-div.styled-select,
-nav[data-jsl10n="all-languages-nav-label"] {
-  display: none !important;
-}
-
-/* 3. In-Article Decorations & Inputs */
-table.plainlinks,
-table.box-More_citations_needed,
-span.mw-editsection,
-sup,
-span.cdx-text-input__icon,
-a.cdx-button,
-hr,
-div.mw-search-spinner {
-  display: none !important;
-}
-
-/* 4. Sidebars, Banners & Metadata */
-div.side-box,
-div.spoken-wikipedia,
-div.nowraplinks,
-div.navbox,
-div.catlinks,
-div.wikipedia25-cta-container {
-  display: none !important;
-}
-
-/* 5. Media Specific Cleanup */
-td > style,
-caption.infobox-title,
-td.infobox-image,
-div#shared-image-desc,
-div#mw-sharedupload {
-  display: none !important;
+img {
+  background-color: #1d1d1d49 !important;
 }
 
 body {
@@ -141,7 +93,7 @@ div#pageTitle {
   margin-top: 50%;
 }
 
-/* Header */
+/* Custom Header */
 #proxifiti-header {
   display: flex;
   flex-direction: column;
