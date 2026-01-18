@@ -185,6 +185,15 @@ function modifyHTML(html, targetUrl) {
 
   $("body").prepend($header);
 
+  $("body").prepend(`<input type="checkbox" id="mobile-overlay-dismiss">
+  <div id="mobile-warning-overlay">
+    <div class="overlay-content">
+      <h2>Developer Notice:</h2>
+      <p>This project is not currently optimized for mobile devices. While functional, some UI elements and layout structures may appear broken. For the best experience, please view this site on a desktop browser.</p>
+      <label for="mobile-overlay-dismiss" class="proceed-btn">Proceed Anyway</label>
+    </div>
+  </div>`);
+
   return $.html();
 }
 

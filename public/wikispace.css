@@ -8,15 +8,12 @@
 div#bodyContent {
   max-width: 1400px !important;
 }
-img {
-  background-color: #1d1d1d49 !important;
-}
 
 body {
   display: flex !important;
   justify-content: center !important;
-  padding-left: 15px !important;
-  padding-right: 15px !important;
+  padding-left: 25px !important;
+  padding-right: 25px !important;
   padding-top: 50px;
   background: #000000 url("/asfalt-light.png") !important;
 }
@@ -237,4 +234,69 @@ div.multiimageinner,
 div.portal-bar {
   background-color: rgba(0, 0, 0, 0.6) !important;
   border: inset rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Notice to anyone opening on mobile using an overlay modal */
+
+#mobile-overlay-dismiss {
+  display: none;
+}
+
+#mobile-warning-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  z-index: 999999;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+  box-sizing: border-box;
+  flex-direction: column;
+}
+
+#mobile-warning-overlay .overlay-content {
+  max-width: 400px;
+}
+
+#mobile-warning-overlay h2 {
+  font-size: 32px !important;
+  margin-bottom: 25px;
+  color: #fff !important;
+  letter-spacing: 1px;
+}
+
+#mobile-warning-overlay p {
+  font-size: 22px;
+  line-height: 1.7;
+  color: #fff !important;
+  margin-bottom: 35px;
+}
+
+#mobile-warning-overlay .proceed-btn {
+  display: inline-block;
+  background: #fff !important;
+  color: #000 !important;
+  border: 2px solid #d6d6d6;
+  padding: 14px 25px;
+  font-size: 25px;
+  border-radius: 1rem !important;
+  font-weight: bold !important;
+  font-family: Quantico, Arial;
+  letter-spacing: 1px;
+}
+
+/* Show overlay only on mobile */
+@media screen and (max-width: 576px) {
+  #mobile-warning-overlay {
+    display: flex;
+  }
+
+  #mobile-overlay-dismiss:checked + #mobile-warning-overlay {
+    display: none !important;
+  }
 }
