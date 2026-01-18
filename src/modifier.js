@@ -86,7 +86,8 @@ function modifyHTML(html, targetUrl) {
     hr,
     div.mw-search-spinner,
     td > style,
-    caption.infobox-title`).remove();
+    caption.infobox-title,
+    div.mw-search-profile-tabs`).remove();
 
   $("img, source").removeAttr("srcset");
 
@@ -162,6 +163,9 @@ function modifyHTML(html, targetUrl) {
   $("input#searchInput").attr("placeholder", "Search WikiSpace");
   $("button.pure-button").text("Search");
 
+  $("button.cdx-search-input__end-button.cdx-button")
+    .removeClass()
+    .addClass("button-bug");
   $("header.vector-header").removeClass("mw-header");
   $("form").removeClass("cdx-search-input--has-end-button");
   $("div.collapsible-list").removeClass();

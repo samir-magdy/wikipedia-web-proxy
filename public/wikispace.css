@@ -31,58 +31,70 @@ div#search-input {
   margin-right: 10px;
 }
 
-input#searchInput {
+label.screen-reader-text + input#searchInput {
   font-size: 20px !important;
-  border: #d3d3d3 groove 3px;
-  border-radius: 2rem;
   background-color: rgb(16, 20, 24) !important;
+  border: #dfdfdf solid 2px !important;
   padding: 15px !important;
+  width: 100% !important;
+  margin-left: 20px !important;
+  border-bottom-left-radius: 15px !important;
+  border-top-left-radius: 15px !important;
 }
 
 span.cdx-text-input__icon {
   color: white !important;
 }
-
+div#simpleSearch > div.cdx-text-input {
+  border-radius: 0 !important;
+  border-right: none !important;
+}
 input#searchInput:focus {
-  border: #d3d3d3 groove 3px;
+  border: #dfdfdf solid 2px !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 div.search-container {
   margin: auto !important;
 }
 
-form#search-form {
-  border-radius: 2rem !important;
-}
-
 /* Button Styles */
 button.pure-button {
-  display: block !important;
   margin: auto !important;
-  padding-left: 30px !important;
-  padding-right: 30px !important;
-  margin-top: 20px !important;
+  padding-left: 25px !important;
+  padding-right: 25px !important;
   color: #000 !important;
   background: #fff !important;
-  border: none !important;
-  border-radius: 2rem !important;
+  border: #dfdfdf solid 2px !important;
+  letter-spacing: 1px !important;
+  border-bottom-right-radius: 15px !important;
+  border-top-right-radius: 15px !important;
+  border-left: none !important;
 }
 
 button.pure-button:hover {
-  background: #1c1c1c !important;
-  border: inset #fff 3px !important;
-  color: #fff !important;
+  background: rgb(226, 226, 226) !important;
+  border: rgb(226, 226, 226) solid 2px !important;
+  border-left: none !important;
 }
 
-button.cdx-button {
-  color: #000 !important;
+button.button-bug {
   font-weight: bold !important;
-  border: none !important;
-  border-radius: 2rem !important;
+  color: #000 !important;
+  border: #dfdfdf solid 2px !important;
+  border-bottom-right-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+  letter-spacing: 1px !important;
+  border-left: none !important;
 }
-
-button.cdx-button:hover {
-  background: #d4d4d4 !important;
+button.button-bug:hover {
+  background: rgb(226, 226, 226) !important;
+  border: rgb(226, 226, 226) solid 2px !important;
+  border-left: none !important;
+  cursor: pointer !important;
 }
 
 /* Page Title */
@@ -129,7 +141,18 @@ div.vector-header-container {
 div#simpleSearch {
   background-color: rgb(16, 20, 24) !important;
 }
-
+div.cdx-text-input > input.cdx-text-input__input {
+  outline: none !important;
+  box-shadow: none !important;
+  font-size: 20px !important;
+  background-color: rgb(16, 20, 24) !important;
+  border: #dfdfdf solid 2px !important;
+  padding: 15px !important;
+  border-bottom-left-radius: 10px !important;
+  border-top-left-radius: 10px !important;
+  width: 400px !important;
+  border-right: none !important;
+}
 /* Figure Styles */
 figure {
   border: groove rgba(255, 255, 255, 0.7) !important;
@@ -165,41 +188,11 @@ td {
 /* Form Styles */
 form#searchform {
   display: flex;
-  gap: 15px;
   margin-bottom: 15px !important;
 }
 
-div.oo-ui-fieldLayout-field {
-  display: flex !important;
-  gap: 10px !important;
-}
-
-input#ooui-php-1 {
-  min-width: 300px;
-  border-radius: 2rem;
-  border: none !important;
-  color: black !important;
-}
-
-input#ooui-php-1:focus {
-  outline: none !important;
-  box-shadow: none !important;
-  border-color: #72777d !important;
-}
-
-button.oo-ui-inputWidget-input {
-  background-color: #fff !important;
-  border-radius: 2rem !important;
-  border: none !important;
-}
-
-button.oo-ui-inputWidget-input:hover {
-  background-color: #d4d4d4 !important;
-}
-
-span.oo-ui-labelElement-label {
-  color: #000 !important;
-  font-weight: bold !important;
+div#mw-search-top-table {
+  display: none !important;
 }
 
 /* Content Container */
