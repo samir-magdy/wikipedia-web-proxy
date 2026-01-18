@@ -169,7 +169,7 @@ function modifyHTML(html, targetUrl) {
   $("div.sidebar-list").removeClass();
   $("div.mw-search-form-wrapper").removeClass();
 
-  // Build the custom persistent header securly with cheerio:
+  // Custom persistent header built securly with cheerio:
 
   const $header = $('<header id="proxifiti-header"></header>');
   const $p = $("<p></p>");
@@ -185,12 +185,11 @@ function modifyHTML(html, targetUrl) {
 
   $("body").prepend($header);
 
-  $("body").prepend(`<input type="checkbox" id="mobile-overlay-dismiss">
+  $("body").prepend(`
   <div id="mobile-warning-overlay">
     <div class="overlay-content">
       <h2>Developer Notice:</h2>
-      <p>This project is not currently optimized for mobile devices. While functional, some UI elements and layout structures may appear broken. For the best experience, please view this site on a desktop browser.</p>
-      <label for="mobile-overlay-dismiss" class="proceed-btn">Proceed Anyway</label>
+      <p>This project is not currently optimized for mobile devices. For the best experience, please view this project on a desktop browser.</p>
     </div>
   </div>`);
 

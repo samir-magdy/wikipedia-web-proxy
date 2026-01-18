@@ -238,10 +238,6 @@ div.portal-bar {
 
 /* Notice to anyone opening on mobile using an overlay modal */
 
-#mobile-overlay-dismiss {
-  display: none;
-}
-
 #mobile-warning-overlay {
   display: none;
   position: fixed;
@@ -254,7 +250,7 @@ div.portal-bar {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 40px;
+  padding: 25px;
   box-sizing: border-box;
   flex-direction: column;
 }
@@ -265,29 +261,17 @@ div.portal-bar {
 
 #mobile-warning-overlay h2 {
   font-size: 32px !important;
+  font-weight: bold !important;
   margin-bottom: 25px;
   color: #fff !important;
   letter-spacing: 1px;
 }
 
 #mobile-warning-overlay p {
-  font-size: 22px;
+  font-size: 26px !important;
   line-height: 1.7;
-  color: #fff !important;
+  color: #e0e1e5 !important;
   margin-bottom: 35px;
-}
-
-#mobile-warning-overlay .proceed-btn {
-  display: inline-block;
-  background: #fff !important;
-  color: #000 !important;
-  border: 2px solid #d6d6d6;
-  padding: 14px 25px;
-  font-size: 25px;
-  border-radius: 1rem !important;
-  font-weight: bold !important;
-  font-family: Quantico, Arial;
-  letter-spacing: 1px;
 }
 
 /* Show overlay only on mobile */
@@ -296,7 +280,9 @@ div.portal-bar {
     display: flex;
   }
 
-  #mobile-overlay-dismiss:checked + #mobile-warning-overlay {
-    display: none !important;
+  /* Hide and disable content behind overlay */
+  #mobile-warning-overlay ~ * {
+    visibility: hidden;
+    pointer-events: none;
   }
 }
