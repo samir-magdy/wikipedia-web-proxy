@@ -87,7 +87,8 @@ function modifyHTML(html, targetUrl) {
     div.mw-search-spinner,
     td > style,
     caption.infobox-title,
-    div.mw-search-profile-tabs`).remove();
+    div.mw-search-profile-tabs,
+    div#mw-imagepage-content`).remove();
 
   $("img, source").removeAttr("srcset");
 
@@ -193,7 +194,7 @@ function modifyHTML(html, targetUrl) {
   <div id="mobile-warning-overlay">
     <div class="overlay-content">
       <h2>Developer Notice:</h2>
-      <p>This project is not currently optimized for mobile devices. For the best experience, please view this project on a desktop browser.</p>
+      <p>This project is not currently optimized for mobile devices, please view from a desktop browser.</p>
     </div>
   </div>`);
 
