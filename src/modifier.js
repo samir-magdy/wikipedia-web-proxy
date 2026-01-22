@@ -176,7 +176,7 @@ function modifyHTML(html, targetUrl) {
 
   // Custom persistent header built securly with cheerio:
 
-  const $header = $('<header id="proxifiti-header"></header>');
+  const $footer = $('<header id="source-footer"></header>');
   const $p = $("<p></p>");
   const $strong = $("<strong>Live Source:&nbsp;</strong>");
 
@@ -186,9 +186,9 @@ function modifyHTML(html, targetUrl) {
     .text(targetUrl);
 
   $p.append($strong).append($link);
-  $header.append($p);
+  $footer.append($p);
 
-  $("body").prepend($header);
+  $("body").append($footer);
 
   $("body").prepend(`
   <div id="mobile-warning-overlay">
