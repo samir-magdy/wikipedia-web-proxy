@@ -1,11 +1,12 @@
 {
   "name": "express",
   "version": "1.0.0",
-  "description": "A simple proxy server using Express.js and Cheerio to scrape and modify HTML content from Wikipedia, giving it a new minimal look while keeping all main articles intact.",
+  "description": "A simple proxy server using Express.js and Cheerio to scrape and modify HTML content from Wikipedia, giving it a new minimal look while maintaining integrity of article information.",
   "main": "src/server.js",
   "type": "module",
   "scripts": {
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
   },
   "author": "Samir Magdy",
   "license": "ISC",
@@ -13,5 +14,8 @@
     "cheerio": "^1.1.2",
     "express": "^5.2.1",
     "helmet": "^8.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
   }
 }

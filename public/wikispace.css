@@ -1,12 +1,19 @@
 /* WikiSpace Custom Styles */
 @import url("https://fonts.googleapis.com/css2?family=Quantico&display=swap");
 
+img.central-featured-logo {
+  background-color: transparent !important;
+}
 * {
   color: #e1e1e1 !important;
   font-family: Quantico, Arial;
 }
 div#bodyContent {
   max-width: 1400px !important;
+}
+h1#main-title-wikispace {
+  color: #ffffff !important;
+  letter-spacing: 1px !important;
 }
 
 body {
@@ -150,10 +157,20 @@ button.button-bug {
   border: #333333 solid 2px !important;
   border-bottom-right-radius: 10px !important;
   border-top-right-radius: 10px !important;
-  padding-left: 15px !important;
-  padding-right: 15px !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
   border-left: none !important;
   letter-spacing: 0.2px !important;
+}
+select.cdx-select,
+option {
+  color: black !important;
+}
+button.cdx-table-pager__limit-form__submit {
+  color: black !important;
+}
+img {
+  background-color: rgb(236, 236, 236) !important;
 }
 
 /* Page Title */
@@ -168,27 +185,27 @@ div.mw-page-container {
 }
 
 /* Figure Styles */
-figure {
-  border: groove rgba(255, 255, 255, 0.7) !important;
-  background-color: rgba(0, 0, 0, 0.6) !important;
+
+figure,
+div.thumbinner,
+div.multiimageinner,
+div.portal-bar,
+div.quotebox,
+div.pullquote,
+code {
+  background-color: rgba(43, 43, 43, 0.458) !important;
+  border: 2px solid #cdcdcd !important;
 }
 
 figcaption {
-  border: groove rgba(255, 255, 255, 0.7) !important;
+  border: 2px solid #cdcdcd !important;
   border-top: none !important;
-  padding: 10px !important;
+  padding: 15px !important;
 }
 
 /* Table Styles */
 table {
   background-color: rgba(0, 0, 0, 0.6) !important;
-  border-collapse: collapse;
-}
-
-th,
-td {
-  border: inset rgba(255, 255, 255, 0.7) !important;
-  padding: 10px !important;
 }
 
 th {
@@ -207,6 +224,7 @@ div#mw-search-top-table {
 div.mw-content-container {
   padding-left: 0;
   padding-right: 0;
+  padding-bottom: 60px;
 }
 
 main#content {
@@ -225,15 +243,19 @@ div.sidebar-list-title {
   margin-bottom: 10px !important;
 }
 
-div.hatnote {
-  display: initial !important;
+/* Collapsible Details/Summary */
+details {
+  background-color: rgba(43, 43, 43, 0.458) !important;
+  border: 2px solid #cdcdcd !important;
+}
+details summary {
+  cursor: pointer;
+  font-weight: bold;
+  user-select: none;
 }
 
-div.thumbinner,
-div.multiimageinner,
-div.portal-bar {
-  background-color: rgba(0, 0, 0, 0.6) !important;
-  border: inset rgba(255, 255, 255, 0.7) !important;
+div.hatnote {
+  display: initial !important;
 }
 
 /* Notice to anyone opening on mobile using an overlay modal */

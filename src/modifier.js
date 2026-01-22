@@ -39,6 +39,78 @@ function handleForms($, baseUrl) {
   });
 }
 
+function convertCollapsibles($) {
+  $(".mw-collapsible").each((index, el) => {
+    const $el = $(el);
+    const $content = $el.find(".mw-collapsible-content");
+
+    if ($content.length) {
+      let summaryText = "";
+
+      const $navboxTitle = $el.find(".navbox-title");
+      if ($navboxTitle.length) {
+        summaryText = $navboxTitle
+          .text()
+          .replace(/\s*(v|t|e)\s*/g, "")
+          .trim();
+      }
+
+      if (!summaryText) {
+        const $sidebarTitle = $el.find(".sidebar-list-title");
+        if ($sidebarTitle.length) {
+          summaryText = $sidebarTitle.text().trim();
+        }
+      }
+
+      if (!summaryText) {
+        const $heading = $el.find("h1, h2, h3, h4, h5, h6").first();
+        if ($heading.length) {
+          summaryText = $heading.text().trim();
+        }
+      }
+
+      if (!summaryText) {
+        const $th = $el.find("th").first();
+        if ($th.length) {
+          summaryText = $th.text().trim();
+        }
+      }
+
+      if (!summaryText) {
+        const $toggle = $el.find(".mw-collapsible-toggle");
+        if ($toggle.length) {
+          summaryText = $toggle
+            .text()
+            .replace(/[\[\]]/g, "")
+            .trim();
+        }
+      }
+
+      if (!summaryText) {
+        summaryText =
+          $el.attr("data-expandtext") || $el.attr("data-collapsetext") || "";
+      }
+
+      $el.find(".mw-collapsible-toggle").remove();
+
+      const isOpen = !$el.hasClass("mw-collapsed");
+
+      const $details = $("<details></details>");
+      if (isOpen) {
+        $details.attr("open", "");
+      }
+
+      const $summary = $("<summary></summary>").text(
+        summaryText || "Show/Hide",
+      );
+      $details.append($summary);
+      $details.append($content.contents());
+
+      $el.replaceWith($details);
+    }
+  });
+}
+
 function modifyHTML(html, targetUrl) {
   const $ = load(html);
   $(`
@@ -47,7 +119,7 @@ function modifyHTML(html, targetUrl) {
     iframe,
     object,
     embed,
-    audio,
+    
     link[rel="preload"],
     link[rel="prefetch"],
     link[rel="dns-prefetch"],
@@ -72,7 +144,6 @@ function modifyHTML(html, targetUrl) {
     div.side-box,
     div.spoken-wikipedia,
     div.nowraplinks,
-    div.navbox,
     div.catlinks,
     div.wikipedia25-cta-container,
     div#shared-image-desc,
@@ -88,15 +159,19 @@ function modifyHTML(html, targetUrl) {
     td > style,
     caption.infobox-title,
     div.mw-search-profile-tabs,
-    div#mw-imagepage-content`).remove();
+    div#mw-imagepage-content, 
+    div.portal-bar, 
+    div.metadata, 
+    div.mw-footer-container, div.plainlinks`).remove();
 
   $("img, source").removeAttr("srcset");
 
   $("title").text("WikiSpace");
 
   handleForms($, targetUrl);
+  convertCollapsibles($);
 
-  $("img, a, link, video, source").each((index, element) => {
+  $("img, a, link, video, source, audio").each((index, element) => {
     const tagName = element.tagName.toLowerCase();
     let attribute;
     let route;
@@ -110,6 +185,9 @@ function modifyHTML(html, targetUrl) {
       route = "/resource";
     } else if (tagName === "video") {
       attribute = "poster";
+      route = "/resource";
+    } else if (tagName === "audio") {
+      attribute = "src";
       route = "/resource";
     } else if (tagName === "source") {
       attribute = "src";
@@ -154,8 +232,8 @@ function modifyHTML(html, targetUrl) {
   $("head").prepend('<link rel="stylesheet" href="/wikispace.css">');
   $("h1.central-textlogo-wrapper").replaceWith(
     `<div id="pageTitle">
-      <h1>WikiSpace</h1>
-      <p style="font-size: 2rem;">A clutter free Wikipedia</p>
+      <h1 id="main-title-wikispace">WikiSpace</h1>
+      <p style="font-size: 2rem; letter-spacing: 1px;">A clutter free Wikipedia</p>
     </div>`,
   );
 
@@ -169,14 +247,9 @@ function modifyHTML(html, targetUrl) {
     .addClass("button-bug");
   $("header.vector-header").removeClass("mw-header");
   $("form").removeClass("cdx-search-input--has-end-button");
-  $("div.collapsible-list").removeClass();
-  $("div.sidebar-list-content").removeClass("mw-collapsible-content");
-  $("div.sidebar-list").removeClass();
   $("div.mw-search-form-wrapper").removeClass();
 
-  // Custom persistent header built securly with cheerio:
-
-  const $footer = $('<header id="source-footer"></header>');
+  const $footer = $('<footer id="source-footer"></footer>');
   const $p = $("<p></p>");
   const $strong = $("<strong>Live Source:&nbsp;</strong>");
 
