@@ -11,7 +11,7 @@ myServer.use(helmet());
 
 myServer.use(express.static("public"));
 
-async function retryAsync(fn, retries = 2, delay = 800) {
+async function retryAsync(fn, retries = 1, delay = 80) {
   let lastError;
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
@@ -46,7 +46,7 @@ myServer.get("/", async (req, res) => {
 
   let result;
   try {
-    result = await retryAsync(() => urlFetcher(fullUrl), 2, 800);
+    result = await retryAsync(() => urlFetcher(fullUrl));
     res.setHeader("Content-Type", result.dataType);
 
     const html = Buffer.from(result.siteData).toString();
@@ -68,7 +68,7 @@ myServer.get("/resource", async (req, res) => {
   }
 
   try {
-    const result = await retryAsync(() => urlFetcher(targetParam), 2, 800);
+    const result = await retryAsync(() => urlFetcher(targetParam));
     res.setHeader("Content-Type", result.dataType);
     res.setHeader("Cache-Control", "public, max-age=86400");
     res.end(Buffer.from(result.siteData));
