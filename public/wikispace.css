@@ -21,8 +21,12 @@ body {
   justify-content: center !important;
   padding-left: 25px !important;
   padding-right: 25px !important;
-  padding-top: 45px;
   background: #121212 !important;
+}
+
+/* Room for the fixed search header; the homepage (portal) has no such header */
+body:not(#www-wikipedia-org) {
+  padding-top: 45px;
 }
 
 /* Source Footer */
@@ -173,9 +177,40 @@ img {
   background-color: rgb(236, 236, 236) !important;
 }
 
+/* Images not loaded yet: placeholder until hovered (see wikispace.js) */
+img[data-src] {
+  background-color: #1a1a1a !important;
+  outline: 1px solid #2f2f2f;
+  outline-offset: -1px;
+  cursor: zoom-in;
+  transition: outline-color 150ms ease;
+}
+img[data-src]:hover,
+img[data-loading] {
+  outline-color: #0083fd;
+}
+img[data-loading] {
+  cursor: progress;
+}
+
+/* Fade the real image in once it has loaded */
+img.ws-revealed {
+  animation: ws-fade-in 200ms ease-out;
+}
+@keyframes ws-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  img.ws-revealed {
+    animation: none;
+  }
+}
+
 /* Page Title */
 div#pageTitle {
-  margin-top: 50%;
+  margin-top: 42%;
 }
 
 /* Page Container */

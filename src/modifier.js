@@ -2,6 +2,39 @@ import { load } from "cheerio";
 
 const URI_SCHEMES = ["javascript:", "mailto:", "tel:", "data:", "#"];
 
+// Images are not fetched until the user hovers over them (see public/wikispace.js).
+// Until then they show a placeholder, which the browser loads once and caches.
+// Images too narrow or short for the "HOVER" label (~50px wide) get the icon-only one.
+const IMG_PLACEHOLDER = "/img-placeholder.svg";
+const IMG_PLACEHOLDER_ICON = "/img-placeholder-icon.svg";
+const LABELED_PLACEHOLDER_MIN_WIDTH = 95;
+const LABELED_PLACEHOLDER_MIN_HEIGHT = 75;
+
+// Images that always load right away instead of waiting for hover.
+// - img.central-featured-logo: the Wikipedia globe on the homepage (/).
+const ALWAYS_LOAD_IMAGES = "img.central-featured-logo";
+
+function placeholderFor($img) {
+  const width = parseInt($img.attr("width"), 10);
+  const height = parseInt($img.attr("height"), 10);
+  const tooSmallForLabel =
+    (width > 0 && width < LABELED_PLACEHOLDER_MIN_WIDTH) ||
+    (height > 0 && height < LABELED_PLACEHOLDER_MIN_HEIGHT);
+  return tooSmallForLabel ? IMG_PLACEHOLDER_ICON : IMG_PLACEHOLDER;
+}
+// Images smaller than this (in px, either side) load normally: icons and flags
+// cost almost nothing and are too small to fit the placeholder text.
+const DEFERRED_IMG_MIN_SIZE = 60;
+
+function isSmallImage($img) {
+  const width = parseInt($img.attr("width"), 10);
+  const height = parseInt($img.attr("height"), 10);
+  return (
+    (width > 0 && width < DEFERRED_IMG_MIN_SIZE) ||
+    (height > 0 && height < DEFERRED_IMG_MIN_SIZE)
+  );
+}
+
 function resolveUrl(baseUrl, relativeUrl) {
   if (!relativeUrl) {
     return "";
@@ -226,10 +259,23 @@ function modifyHTML(html, targetUrl) {
     const modifiedUrl = resolveUrl(targetUrl, original);
 
     const proxiedUrl = `${route}?targetUrl=${encodeURIComponent(modifiedUrl)}`;
+
+    if (
+      tagName === "img" &&
+      !isSmallImage($(element)) &&
+      !$(element).is(ALWAYS_LOAD_IMAGES)
+    ) {
+      $(element)
+        .attr("data-src", proxiedUrl)
+        .attr("src", placeholderFor($(element)));
+      return;
+    }
+
     $(element).attr(attribute, proxiedUrl);
   });
 
   $("head").prepend('<link rel="stylesheet" href="/wikispace.css">');
+  $("head").append('<script src="/wikispace.js" defer></script>');
   $("h1.central-textlogo-wrapper").replaceWith(
     `<div id="pageTitle">
       <h1 id="main-title-wikispace">WikiSpace</h1>

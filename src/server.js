@@ -1,13 +1,10 @@
 import express from "express";
-import helmet from "helmet";
 import urlFetcher from "./fetcher.js";
 import modifyHTML from "./modifier.js";
 
 const myServer = express();
 const PORT = process.env.PORT || 3000;
 const targetUrl = "https://wikipedia.org";
-
-myServer.use(helmet());
 
 myServer.use(express.static("public"));
 
